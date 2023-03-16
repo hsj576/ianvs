@@ -111,9 +111,12 @@ class TestCase:
         metric_res = {}
         system_metric_types = [e.value for e in SystemMetricType.__members__.values()]
         for metric_name, metric_func in metric_funcs.items():
+            print(metric_name)
             if metric_name in system_metric_types:
                 metric_res[metric_name] = metric_func(kwargs)
+                print("hahahhahha")
             else:
                 metric_res[metric_name] = metric_func(test_dataset.y, paradigm_result)
+                print("666666")
 
         return metric_res

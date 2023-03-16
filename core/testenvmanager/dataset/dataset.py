@@ -79,10 +79,25 @@ class Dataset:
             tmp_file = os.path.join(tempfile.mkdtemp(), "index.txt")
             with open(tmp_file, "w", encoding="utf-8") as file:
                 for line in lines:
-                    front, back = line.split(" ")
-                    file.writelines(
-                        f"{os.path.abspath(os.path.join(root, front))} "
-                        f"{os.path.abspath(os.path.join(root, back))}")
+                    #front, back = line.split(" ")
+                    
+                    words = line.split(" ")
+                    if len(words) == 2:
+                        front = words[0]
+                        back = words[1]
+                        file.writelines(
+                            f"{os.path.abspath(os.path.join(root, front))} "
+                            f"{os.path.abspath(os.path.join(root, back))}")
+                    else:
+                        front = words[0]
+                        depth = words[1]
+                        back = words[2]
+                        if back[-1] != '\n':
+                            back = back + '\n'
+                        file.writelines(
+                            f"{os.path.abspath(os.path.join(root, front))} "
+                            f"{os.path.abspath(os.path.join(root, depth))} "
+                            f"{os.path.abspath(os.path.join(root, back))}")
 
             new_file = tmp_file
 
@@ -251,6 +266,7 @@ class Dataset:
 
         if data_format == DatasetFormat.TXT.value:
             data = TxtDataParse(data_type=data_type, func=feature_process)
+            #print(file)
             data.parse(file, use_raw=use_raw)
 
         return data
