@@ -133,7 +133,7 @@ class LifelongLearning(ParadigmBase):
         model_metric = model_eval_info.get("model_metric")
         _, metric_func = get_metric_func(model_metric)
         #_ = job.evaluate(inference_dataset, metrics=metric_func)
-        test_res = job.my_evaluate(inference_dataset, metrics=metric_func)
+        test_res = job.my_inference(inference_dataset, **kwargs)
         del job
         
         return test_res, self.system_metric_info

@@ -163,6 +163,11 @@ class Dataset:
                                               data_types=dataset_types,
                                               output_dir=output_dir,
                                               times=times)
+        if method == "my_splitting":
+            return self._my_splitting(dataset_url, dataset_format, ratio,
+                                              data_types=dataset_types,
+                                              output_dir=output_dir,
+                                              times=times)
 
         raise ValueError(f"dataset splitting method({method}) is not supported,"
                          f"currently, method supports 'default'.")
@@ -228,6 +233,54 @@ class Dataset:
                                        data_types[0], index, data_format),
                 self._get_dataset_file(new_dataset[int(new_num * ratio):], output_dir,
                                        data_types[1], index, data_format)))
+
+            index += 1
+
+        return data_files
+    
+    def _my_splitting(self, data_file, data_format, ratio,
+                              data_types=None, output_dir=None, times=1):
+        if not data_types:
+            data_types = ("train", "eval")
+
+        if not output_dir:
+            output_dir = tempfile.mkdtemp()
+
+        all_data = self._read_data_file(data_file, data_format)
+
+        data_files = []
+
+        all_num = len(all_data)
+        index0 = 0
+        for i in range(all_num):
+            if 'synthia_sim' in all_data[i]:
+                continue
+            else:
+                index0 = i
+                break
+        new_dataset = all_data[:index0]
+        new_num = len(new_dataset)
+        data_files.append((
+                self._get_dataset_file(new_dataset[:int(new_num * ratio)], output_dir,
+                                       data_types[0], 1, data_format),
+                self._get_dataset_file(new_dataset[int(new_num * ratio):], output_dir,
+                                       data_types[1], 1, data_format)))
+        times = times - 1
+        step = int((all_num-index0) / times)
+        index = 1
+        while index <= times:
+            if index == times:
+                new_dataset = all_data[index0 + step * (index - 1):]
+            else:
+                new_dataset = all_data[index0 + step * (index - 1):index0 + step * index]
+
+            new_num = len(new_dataset)
+
+            data_files.append((
+                self._get_dataset_file(new_dataset[:int(new_num * ratio)], output_dir,
+                                       data_types[0], index+1, data_format),
+                self._get_dataset_file(new_dataset[int(new_num * ratio):], output_dir,
+                                       data_types[1], index+1, data_format)))
 
             index += 1
 
