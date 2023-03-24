@@ -6,8 +6,8 @@ benchmarkingjob:
 
   # the url address of test environment configuration file; string type;
   # the file format supports yaml/yml;
-  testenv: "./examples/semantic_segmentation/lifelong_learning_bench/testenv/testenv.yaml"
-  #testenv: "./examples/semantic_segmentation/lifelong_learning_bench/testenv/testenv-small.yaml"
+  #testenv: "./examples/semantic_segmentation/lifelong_learning_bench/testenv/testenv.yaml"
+  testenv: "./examples/semantic_segmentation/lifelong_learning_bench/testenv/testenv-small.yaml"
   #testenv: "./examples/semantic_segmentation/lifelong_learning_bench/testenv/testenv-full.yaml"
 
   # the configuration of test object
