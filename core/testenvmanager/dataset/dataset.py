@@ -80,8 +80,17 @@ class Dataset:
             with open(tmp_file, "w", encoding="utf-8") as file:
                 for line in lines:
                     #front, back = line.split(" ")
-                    
+                    #copy all the files in the line
+                    line = line.strip()
                     words = line.split(" ")
+                    length = len(words)
+                    words[-1] = words[-1] + '\n'
+                    for i in range(length):
+                        file.writelines(
+                            f"{os.path.abspath(os.path.join(root, words[i]))}")
+                        if i < length-1:
+                            file.writelines(" ")
+                    '''
                     if len(words) == 2:
                         front = words[0]
                         back = words[1]
@@ -98,6 +107,7 @@ class Dataset:
                             f"{os.path.abspath(os.path.join(root, front))} "
                             f"{os.path.abspath(os.path.join(root, depth))} "
                             f"{os.path.abspath(os.path.join(root, back))}")
+                    '''
 
             new_file = tmp_file
 
@@ -163,6 +173,7 @@ class Dataset:
                                               data_types=dataset_types,
                                               output_dir=output_dir,
                                               times=times)
+        # add new splitting method for semantic segmantation
         if method == "my_splitting":
             return self._my_splitting(dataset_url, dataset_format, ratio,
                                               data_types=dataset_types,
@@ -238,6 +249,7 @@ class Dataset:
 
         return data_files
     
+    # add new splitting method for semantic segmentation
     def _my_splitting(self, data_file, data_format, ratio,
                               data_types=None, output_dir=None, times=1):
         if not data_types:
