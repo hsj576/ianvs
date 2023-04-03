@@ -131,10 +131,6 @@ class LifelongLearning(ParadigmBase):
             inference_dataset = self.dataset.load_data(self.dataset.test_url, "eval",
                                                    feature_process=_data_feature_process)
             kwargs = {}
-            #model_eval_info = self.model_eval_config
-            #model_metric = model_eval_info.get("model_metric")
-            #_, metric_func = get_metric_func(model_metric)
-            #_ = job.evaluate(inference_dataset, metrics=metric_func)
             test_res = job.my_inference(inference_dataset, **kwargs)
             del job
         
@@ -207,7 +203,6 @@ class LifelongLearning(ParadigmBase):
             kwargs = {"mode": mode}
         #print(len(inference_dataset.x))
         for i, _ in enumerate(inference_dataset.x):
-            #print(i)
             data = BaseDataSource(data_type="test")
             data.x = inference_dataset.x[i:(i + 1)]
             res, is_unseen_task, _ = job.inference(data, **kwargs)

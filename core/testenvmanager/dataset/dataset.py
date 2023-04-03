@@ -79,7 +79,6 @@ class Dataset:
             tmp_file = os.path.join(tempfile.mkdtemp(), "index.txt")
             with open(tmp_file, "w", encoding="utf-8") as file:
                 for line in lines:
-                    #front, back = line.split(" ")
                     #copy all the files in the line
                     line = line.strip()
                     words = line.split(" ")
@@ -174,8 +173,8 @@ class Dataset:
                                               output_dir=output_dir,
                                               times=times)
         # add new splitting method for semantic segmantation
-        if method == "my_splitting":
-            return self._my_splitting(dataset_url, dataset_format, ratio,
+        if method == "city_splitting":
+            return self._city_splitting(dataset_url, dataset_format, ratio,
                                               data_types=dataset_types,
                                               output_dir=output_dir,
                                               times=times)
@@ -250,7 +249,7 @@ class Dataset:
         return data_files
     
     # add new splitting method for semantic segmentation
-    def _my_splitting(self, data_file, data_format, ratio,
+    def _city_splitting(self, data_file, data_format, ratio,
                               data_types=None, output_dir=None, times=1):
         if not data_types:
             data_types = ("train", "eval")
