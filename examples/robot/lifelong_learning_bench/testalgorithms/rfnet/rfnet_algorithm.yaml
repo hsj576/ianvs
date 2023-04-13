@@ -8,7 +8,7 @@ algorithm:
   lifelong_learning_data_setting:
     # ratio of training dataset; float type;
     # the default value is 0.8.
-    train_ratio: 0.95
+    train_ratio: 0.9
     # the method of splitting dataset; string type; optional;
     # currently the options of value are as follows:
     #   1> "default": the dataset is evenly divided based train_ratio;

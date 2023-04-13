@@ -88,6 +88,7 @@ class LifelongLearning(ParadigmBase):
             dataset_files = self._split_dataset(splitting_dataset_times=rounds)
             # pylint: disable=C0103
             for r in range(1, rounds + 1):
+                print(r)
                 if r == 1:
                     train_dataset_file, eval_dataset_file = dataset_files[r - 1]
                     self.cloud_task_index = self._train(self.cloud_task_index,
@@ -143,7 +144,7 @@ class LifelongLearning(ParadigmBase):
                     self.cloud_task_index = self._train(self.cloud_task_index,
                                                         train_dataset_file,
                                                         r)
-                    self.edge_task_index = self._eval(self.cloud_task_index,
+                    self.edge_task_index = self._eval(self.edge_task_index,
                                                       eval_dataset_file,
                                                       r)
                 else:
@@ -222,6 +223,9 @@ class LifelongLearning(ParadigmBase):
         return inference_results, unseen_task_train_samples
 
     def _train(self, cloud_task_index, train_dataset, rounds):
+        print("start training-----------------------------------")
+        print(cloud_task_index)
+        print(train_dataset)
         train_output_dir = os.path.join(self.workspace, f"output/train/{rounds}")
         if not is_local_dir(train_output_dir):
             os.makedirs(train_output_dir)
@@ -236,14 +240,16 @@ class LifelongLearning(ParadigmBase):
         if isinstance(train_dataset, str):
             train_dataset = self.dataset.load_data(train_dataset, "train",
                                                    feature_process=_data_feature_process)
-
+        print(train_dataset)
         job = self.build_paradigm_job(ParadigmType.LIFELONG_LEARNING.value)
         cloud_task_index = job.train(train_dataset)
+        print(cloud_task_index)
         del job
 
         return cloud_task_index
 
     def _eval(self, cloud_task_index, data_index_file, rounds):
+        print("start evaluate-----------------------------------")
         eval_output_dir = os.path.join(self.workspace, f"output/eval/{rounds}")
         if not is_local_dir(eval_output_dir):
             os.makedirs(eval_output_dir)
