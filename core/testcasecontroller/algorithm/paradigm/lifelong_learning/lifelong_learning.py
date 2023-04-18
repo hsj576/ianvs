@@ -91,12 +91,21 @@ class LifelongLearning(ParadigmBase):
                 print(r)
                 if r == 1:
                     train_dataset_file, eval_dataset_file = dataset_files[r - 1]
+                    train_dataset_file_2, eval_dataset_file_2 = dataset_files[r]
                     self.cloud_task_index = self._train(self.cloud_task_index,
                                                         train_dataset_file,
                                                         r)
                     self.edge_task_index = self._eval(self.cloud_task_index,
                                                       eval_dataset_file,
                                                       r)
+                    
+                    self.cloud_task_index = self._train(self.cloud_task_index,
+                                                        train_dataset_file_2,
+                                                        r)
+                    self.edge_task_index = self._eval(self.cloud_task_index,
+                                                      eval_dataset_file_2,
+                                                      r)
+                    
                 else:
                     infer_dataset_file, eval_dataset_file = dataset_files[r - 1]
                     '''
@@ -118,7 +127,7 @@ class LifelongLearning(ParadigmBase):
                     self.cloud_task_index = self._train(self.cloud_task_index,
                                                         infer_dataset_file,
                                                         r)
-                    self.edge_task_index = self._eval(self.cloud_task_index,
+                    self.edge_task_index = self._eval(self.edge_task_index,
                                                       eval_dataset_file,
                                                       r)
             '''
@@ -144,7 +153,7 @@ class LifelongLearning(ParadigmBase):
                     self.cloud_task_index = self._train(self.cloud_task_index,
                                                         train_dataset_file,
                                                         r)
-                    self.edge_task_index = self._eval(self.edge_task_index,
+                    self.edge_task_index = self._eval(self.cloud_task_index,
                                                       eval_dataset_file,
                                                       r)
                 else:

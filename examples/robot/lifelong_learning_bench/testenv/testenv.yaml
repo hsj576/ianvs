@@ -32,4 +32,4 @@ testenv:
     - name: "samples_transfer_ratio"
 
   # incremental rounds setting; int type; default value is 2;
-  incremental_rounds: 3
+  incremental_rounds: 2
