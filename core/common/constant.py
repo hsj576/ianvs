@@ -69,7 +69,8 @@ class SystemMetricType(Enum):
     SAMPLES_TRANSFER_RATIO = "samples_transfer_ratio"
     FWT = "FWT"
     BWT = "BWT"
-
+    Task_Avg_Acc = "Task_Avg_Acc"
+    Matrix = "Matrix"
 
 class TestObjectType(Enum):
     """
