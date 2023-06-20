@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """Lifelong Learning Paradigm"""
-
+# pylint: disable=C0412
 import os
 import shutil
 from sedna.common.log import LOGGER
