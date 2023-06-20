@@ -66,6 +66,7 @@ class SystemMetricType(Enum):
     """
     System metric type of ianvs.
     """
+    # pylint: disable=C0103
     SAMPLES_TRANSFER_RATIO = "samples_transfer_ratio"
     FWT = "FWT"
     BWT = "BWT"

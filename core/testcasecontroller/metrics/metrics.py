@@ -90,26 +90,32 @@ def bwt_func(system_metric_info: dict):
     """
     compute BWT
     """
+    # pylint: disable=C0103
+    # pylint: disable=W0632
     info = system_metric_info.get(SystemMetricType.Matrix.value)
-    my_matrix, BWT_score, FWT_score = compute("all", info["all"])
+    _, BWT_score, _ = compute("all", info["all"])
     return BWT_score
 
 def fwt_func(system_metric_info: dict):
     """
     compute FWT
     """
+    # pylint: disable=C0103
+    # pylint: disable=W0632
     info = system_metric_info.get(SystemMetricType.Matrix.value)
-    my_matrix, BWT_score, FWT_score = compute("all", info["all"])
+    _, _, FWT_score = compute("all", info["all"])
     return FWT_score
 
 def matrix_func(system_metric_info: dict):
     """
     compute FWT
     """
+    # pylint: disable=C0103
+    # pylint: disable=W0632
     info = system_metric_info.get(SystemMetricType.Matrix.value)
     my_dict = {}
     for key in info.keys():
-        my_matrix, BWT_score, FWT_score = compute(key, info[key])
+        my_matrix, _, _ = compute(key, info[key])
         my_dict[key] = my_matrix
     return my_dict
 

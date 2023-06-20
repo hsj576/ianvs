@@ -94,6 +94,7 @@ class LifelongLearning(ParadigmBase):
             # pylint: disable=C0103
             # pylint: disable=C0206
             # pylint: disable=C0201
+            # pylint: disable=W1203
             my_dict = {}
             for r in range(rounds + 1):
                 train_dataset_file, eval_dataset_file = dataset_files[r]
