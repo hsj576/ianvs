@@ -13,13 +13,12 @@
 # limitations under the License.
 
 """Lifelong Learning Paradigm"""
-
+# pylint: disable=C0412
 import os
 import shutil
-from core.common.log import LOGGER
 import numpy as np
 from sedna.datasources import BaseDataSource
-
+from core.common.log import LOGGER
 from core.common.constant import ParadigmType, SystemMetricType
 from core.testcasecontroller.algorithm.paradigm.base import ParadigmBase
 from core.testcasecontroller.metrics import get_metric_func
