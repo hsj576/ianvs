@@ -6,7 +6,7 @@ benchmarkingjob:
 
   # the url address of test environment configuration file; string type;
   # the file format supports yaml/yml;
-  testenv: "./examples/robot/lifelong_learning_bench/testenv/testenv-robot-small.yaml"
+  testenv: "./examples/robot/lifelong_learning_bench/testenv/testenv-robot.yaml"
 
   # the configuration of test object
   test_object:
